@@ -1,22 +1,21 @@
 package com.example.web.services;
 
 import com.example.web.entities.Post;
-import com.example.web.repositories.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 @Service
 public class PostService {
 
-    @Autowired
-    private PostRepository postRepository;
-
-    public Iterable<Post> getAllPosts(){
-        return postRepository.findAll();
+    public Iterable<Post> getAllPosts() {
+        return Arrays.asList(new Post(), new Post());
     }
 
     public void insert(Post post) {
-        postRepository.save(post);
+        // postRepository.save(post);
+        System.out.println("post jest");
     }
 }
