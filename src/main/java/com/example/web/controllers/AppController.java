@@ -12,18 +12,13 @@ public class AppController {
 
     @Autowired
     private PostService postService;
-
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
-
-    @GetMapping("/posts")
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(value="/posts")
     public Iterable<Post> posts(){
         return postService.getAllPosts();
     }
 
-    @PostMapping("/post")
+    @PostMapping(value="/post")
     public void publishPost(@RequestBody Post post){
         if(post.getDateCreated() == null)
             post.setDateCreated(new Date());
