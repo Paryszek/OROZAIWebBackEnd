@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class AppController {
@@ -14,14 +15,16 @@ public class AppController {
     private PostService postService;
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(value="/posts")
-    public Iterable<Post> posts(){
+    public List<Post> posts(){
         return postService.getAllPosts();
     }
 
     @PostMapping(value="/post")
-    public void publishPost(@RequestBody Post post){
+    public String publishPost(@RequestBody Post post){
+        System.out.println(post);
         if(post.getDateCreated() == null)
             post.setDateCreated(new Date());
         postService.insert(post);
+        return "Post was published";
     }
 }
