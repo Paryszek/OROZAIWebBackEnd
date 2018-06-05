@@ -20,13 +20,4 @@ public class PostService {
     public void insert(Post post) {
         postRepository.save(post);
     }
-
-
-//    public boolean deletePost(Long postId){
-//        Post thePost = postRepository.findOne(postId);
-//        if(thePost == null)
-//            return false;
-//        postRepository.delete(postId);
-//        return true;
-//    }
 }
