@@ -14,9 +14,9 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
-    public void insertUser(Member user) {
+    public void insertUser(Member member) {
         try {
-            memberRepository.save(user);
+            memberRepository.save(member);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class MemberService {
         List<Member> members = memberRepository.findAll();
         Member member = new Member();
         for (Member _member : members) {
-            if(_member.getPassword().equals(memberLogin.getPassword()) && _member.getLogin().equals(memberLogin.getPassword())) {
+            if(_member.getPassword().equals(memberLogin.getPassword()) && _member.getLogin().equals(memberLogin.getLogin())) {
                 member = _member;
                 break;
             }

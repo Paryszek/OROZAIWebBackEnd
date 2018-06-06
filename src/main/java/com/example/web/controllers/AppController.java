@@ -34,16 +34,25 @@ public class AppController {
         return "Post published";
     }
 
+    @PostMapping(value="/register")
+    public void registerMember(@RequestBody Member member) {
+        if (member != null &&
+                member.getLogin().length() != 0 &&
+                member.getPassword().length() != 0 &&
+                member.getFirstName().length() != 0 &&
+                member.getLastName().length() != 0) {
+            memberService.insertUser(member);
+        }
+    }
+
     @PostMapping(value="/login")
-    public String loginMember(@RequestBody MemberLogin member) {
+    public Boolean loginMember(@RequestBody MemberLogin member) {
         if (member != null && !member.getLogin().equals("") && !member.getPassword().equals("")) {
             Member _member = memberService.getUser(member);
-            if (_member != null) {
-                return "Login succeeded";
-            } else {
-                return "Login failed no such member";
+            if (_member.getLogin() != null) {
+                return true;
             }
         }
-        return "Login failed";
+        return false;
     }
 }
