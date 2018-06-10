@@ -1,7 +1,6 @@
 package com.example.web.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Post {
@@ -12,7 +11,8 @@ public class Post {
 
     private String title;
     private String body;
-    private Date dateCreated;
+    private String owner;
+    private String dateCreated;
 
     public Post() {
     }
@@ -41,11 +41,14 @@ public class Post {
         this.body = body;
     }
 
-    public Date getDateCreated() {
+    public String getOwner() { return this.owner; }
+    public void setOwner(String owner) { this.owner = owner; }
+
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 

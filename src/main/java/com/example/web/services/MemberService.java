@@ -14,6 +14,7 @@ public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
 
+
     public void insertUser(Member member) {
         try {
             memberRepository.save(member);
@@ -21,12 +22,26 @@ public class MemberService {
             e.printStackTrace();
         }
     }
-
+    public List<Member> getUsers() {
+        return memberRepository.findAll();
+    }
     public Member getUser(MemberLogin memberLogin) {
         List<Member> members = memberRepository.findAll();
         Member member = new Member();
         for (Member _member : members) {
             if(_member.getPassword().equals(memberLogin.getPassword()) && _member.getLogin().equals(memberLogin.getLogin())) {
+                member = _member;
+                break;
+            }
+        }
+        return member;
+    }
+
+    public Member getUserByName(String name) {
+        List<Member> members = memberRepository.findAll();
+        Member member = new Member();
+        for (Member _member : members) {
+            if(_member.getLogin().equals(name)) {
                 member = _member;
                 break;
             }
