@@ -13,6 +13,7 @@ public class Post {
     private String body;
     private String owner;
     private String dateCreated;
+    private String image;
 
     public Post() {
     }
@@ -47,9 +48,10 @@ public class Post {
     public String getDateCreated() {
         return dateCreated;
     }
-
     public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
+    public String getImage() { return this.image; }
+    public void setImage(String image) { this.image = image; }
 }

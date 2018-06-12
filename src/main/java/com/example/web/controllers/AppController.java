@@ -31,6 +31,7 @@ public class AppController {
             post.setTitle("Lorem ipsum dolor sit amet");
             post.setBody("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tincidunt luctus augue ac consectetur. ");
             post.setOwner("test");
+            post.setImage("http://www.footballwallpapers.us/wp-content/uploads/2018/04/florida-shipwrecks-map-gallery-atocha-certificate-of-authenticity-treasure-map-and-wreck-story-750-x-300-pixels.jpg");
             post.setDateCreated(new Date().toString());
             postService.insert(post);
         }
