@@ -9,6 +9,7 @@ import com.example.web.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -24,8 +25,8 @@ public class AppController {
     private MemberService memberService;
 
     @GetMapping(value="/posts")
-    public List<Post> posts(){
-
+    public List<Post> posts(int count){
+        List<Post> posts = new ArrayList<>();
         if (this.postService.getAllPosts().isEmpty()) {
             Post post = new Post();
             post.setTitle("Lorem ipsum dolor sit amet");
@@ -34,7 +35,13 @@ public class AppController {
             post.setDateCreated(new Date().toString());
             postService.insert(post);
         }
-        return postService.getAllPosts();
+        if(count == 0) {
+            posts = postService.getAllPosts();
+        } else {
+            posts = postService.getNumberOfPosts(count);
+        }
+
+        return posts;
     }
 
     @GetMapping(value="/role")
