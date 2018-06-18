@@ -6,6 +6,7 @@ import com.example.web.entities.Member;
 import com.example.web.entities.Role;
 import com.example.web.services.PostService;
 import com.example.web.services.MemberService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,9 +47,19 @@ public class AppController {
     }
 
     @GetMapping(value="/role")
-    public Member role(String login){
+    public Member role(String login) {
         if (login != null && !login.equals("")) return memberService.getUserByName(login);
         return null;
+    }
+
+    @GetMapping(value="/users")
+    public List<Member> users() {
+        return memberService.getUsers();
+    }
+
+    @PostMapping(value="/remove")
+    public Boolean removeUser(@RequestBody int id) {
+        return memberService.removeUser(id);
     }
 
     @PostMapping(value="/post")
@@ -90,12 +101,16 @@ public class AppController {
         if (memberService.getUsers().isEmpty())
         {
             Member admin = new Member();
+            admin.setFirstName("Adrian");
+            admin.setLastName("Kowalski");
             admin.setLogin("admin");
             admin.setPassword("admin");
             admin.setRoles(Arrays.asList(new Role("USER"), new Role("ADMIN")));
             memberService.insertUser(admin);
 
             Member user = new Member();
+            user.setFirstName("Mateusz");
+            user.setLastName("Nowakowski");
             user.setLogin("user");
             user.setPassword("user");
             user.setRoles(Arrays.asList(new Role("USER")));

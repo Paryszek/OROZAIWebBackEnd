@@ -49,4 +49,27 @@ public class MemberService {
         return member;
     }
 
+    public Member getUserById(long id) {
+        List<Member> members = memberRepository.findAll();
+        Member member = new Member();
+        for (Member _member : members) {
+            if(_member.getId().equals(id)) {
+                member = _member;
+                break;
+            }
+        }
+        return member;
+    }
+
+    public Boolean removeUser(int id) {
+        List<Member> memberList = getUsers();
+        int sizeBefore = memberList.size();
+        memberRepository.delete(getUserById(Long.parseLong(Integer.toString(id))));
+        int sizeAfter = getUsers().size();
+        if (sizeBefore != sizeAfter) {
+            return true;
+        }
+        return false;
+    }
+
 }
